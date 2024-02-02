@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7487249208457563"
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7487249208457563"
      crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="/games/games.css">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="/logo.png">
 </head>
 <body>
-    <form id="uv-form"">
-      <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/> 
-    </form>
+  <form id="uv-form">
+    <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/> 
+  </form>
   <script src="/uv/uv.bundle.js" defer></script>
   <script src="/uv/uv.config.js" defer></script>
   <script src="/register-sw.js" defer></script>
@@ -18,18 +19,33 @@
   <script src="/assets/js/panic.js" defer></script>
   <input id="key-input" type="text" placeholder="Key" style="display: none;" value="]">
   <input id="website-input" type="text" placeholder="Website" style="display: none;" value="https://classroom.gooogle.com">
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      // Replace 'https://141.101.122.98:80' with your actual proxy URL
+      const proxyUrl = 'https://141.101.122.98:80';
+      const launchURL = function(url) {
+        return fetch(proxyUrl + url)
+          .then(response => response.text())
+          .then(html => {
+            const iframe = document.createElement('iframe');
+            iframe.srcdoc = html;
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            document.body.appendChild(iframe);
+          });
+      };
+
+      launchURL('google.com').catch(err => {
+          console.error("Error launching game:", err);
+      });
+      
+      localStorage.setItem('app-name', 'Google');
+      localStorage.setItem('app-image', '/assets/img/websites/google.png');
+      localStorage.setItem('shownameandimg', 'false');
+      setIframeType('home');
+    });
+  </script>
+  <script src="/assets/js/settings/index.js"></script>
+  <script src="/assets/js/settings.js"></script>
 </body>
 </html>
-<script>
-  window.addEventListener('DOMContentLoaded', function() {
-    launchURL('google.com').catch(err => {
-        console.error("Error launching game:", err);
-    });
-    localStorage.setItem('app-name', 'Google');
-    localStorage.setItem('app-image', '/assets/img/websites/google.png');
-    localStorage.setItem('shownameandimg', 'false')
-    setIframeType('home');
-});
-</script>
-<script src="/assets/js/settings/index.js"></script>
-<script src="/assets/js/settings.js"></script>
